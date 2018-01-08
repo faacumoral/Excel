@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelCreator", "ExcelCreator\ExcelCreator.csproj", "{2198DD96-5E31-4EB8-90D5-0BFBB20233EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelReader", "ExcelReader\ExcelReader.csproj", "{4A413294-7454-4F75-BE87-EB9ED30F0BED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExcels", "TestExcels\TestExcels.csproj", "{30D6BA9A-067F-46B7-BB05-00D711D7A412}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2198DD96-5E31-4EB8-90D5-0BFBB20233EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2198DD96-5E31-4EB8-90D5-0BFBB20233EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2198DD96-5E31-4EB8-90D5-0BFBB20233EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2198DD96-5E31-4EB8-90D5-0BFBB20233EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A413294-7454-4F75-BE87-EB9ED30F0BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A413294-7454-4F75-BE87-EB9ED30F0BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A413294-7454-4F75-BE87-EB9ED30F0BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A413294-7454-4F75-BE87-EB9ED30F0BED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D6BA9A-067F-46B7-BB05-00D711D7A412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D6BA9A-067F-46B7-BB05-00D711D7A412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D6BA9A-067F-46B7-BB05-00D711D7A412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D6BA9A-067F-46B7-BB05-00D711D7A412}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFE3EC3E-556E-44A3-AC9F-9A6DD6213FDF}
+	EndGlobalSection
+EndGlobal

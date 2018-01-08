@@ -1,0 +1,9 @@
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\obj\Debug\ExcelReader.csprojResolveAssemblyReference.cache
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\obj\Debug\ExcelReader.csproj.CoreCompileInputs.cache
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\bin\Debug\ExcelReader.dll.config
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\bin\Debug\ExcelReader.dll
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\bin\Debug\ExcelReader.pdb
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\bin\Debug\EPPlus.dll
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\bin\Debug\EPPlus.xml
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\obj\Debug\ExcelReader.dll
+C:\Users\FacundoMoral\Desktop\ConsoleApp1\ExcelReader\obj\Debug\ExcelReader.pdb
