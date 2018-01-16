@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelReader;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace TestExcels
     {
         static void Main(string[] args)
         {
+            var file = File.ReadAllBytes("archivo.xlsx");
+            ExcelReader.ExcelReader excel = new ExcelReader.ExcelReader(file);
+
+            Console.ReadKey();
+
         }
     }
 }

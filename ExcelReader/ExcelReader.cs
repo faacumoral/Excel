@@ -15,7 +15,7 @@ namespace ExcelReader
         /// si se agrega una entidad por mas que haya error en algun parseo
         /// </summary>
         Boolean _agregarTodos = true;
-        public Boolean AgregarTodos { get { return _agregarTodos;  } set { _agregarTodos = value; } }
+        public Boolean AgregarTodos { get { return _agregarTodos; } set { _agregarTodos = value; } }
 
         /// <summary>
         /// los errores de parseo de los datos
@@ -31,92 +31,209 @@ namespace ExcelReader
             _excel = new ExcelPackage(new MemoryStream(file));
         }
 
-        public List<T> LeerHojaPorNombre<T>(string nombreHoja) where T : new()
+        /// <summary>
+        /// leer toda una hoja 
+        /// </summary>
+        /// <typeparam name="T">tipo de datos de la hoja</typeparam>
+        /// <param name="nombreHoja"></param>
+        /// <param name="vertical">si lee vertical</param>
+        /// <returns></returns>
+        public List<T> LeerHoja<T>(string nombreHoja, bool vertical) where T : new()
         {
             var hoja = _excel.Workbook.Worksheets[nombreHoja];
             if (hoja == null)
             {
                 throw new ArgumentException("El nombre de la hoja no es válido");
             }
-            return _leerHoja<T>(hoja);
+            return _leer<T>(hoja, hoja.Dimension.Start.Row, hoja.Dimension.End.Row, hoja.Dimension.Start.Column, hoja.Dimension.End.Column, vertical);
         }
 
-        public List<T> LeerHojaPorIndice<T>(int numeroHoja) where T : new()
+        /// <summary>
+        /// leer toda una hoja
+        /// </summary>
+        /// <typeparam name="T">tipo de datos de la hoja</typeparam>
+        /// <param name="numeroHoja"></param>
+        /// <param name="vertical">si lee vertical</param>
+        /// <returns></returns>
+        public List<T> LeerHoja<T>(int numeroHoja, bool vertical) where T : new()
         {
             var hoja = _excel.Workbook.Worksheets[numeroHoja];
             if (hoja == null)
             {
                 throw new ArgumentException("El numero de la hoja no es válido");
             }
-            return _leerHoja<T>(hoja);
+            return _leer<T>(hoja, hoja.Dimension.Start.Row, hoja.Dimension.End.Row, hoja.Dimension.Start.Column, hoja.Dimension.End.Column, vertical);
         }
 
-        public List<T> LeerHoja<T>() where T : new()
+        /// <summary>
+        /// leer toda una hoja 
+        /// </summary>
+        /// <typeparam name="T">tipo de datos de la hoja</typeparam>
+        /// <param name="vertical">si lee vertical</param>
+        /// <returns></returns>
+        public List<T> LeerHoja<T>(bool vertical) where T : new()
         {
-            return _leerHoja<T>(_excel.Workbook.Worksheets[1]);
+            var hoja = _excel.Workbook.Worksheets[1];
+            return _leer<T>(hoja, hoja.Dimension.Start.Row, hoja.Dimension.End.Row, hoja.Dimension.Start.Column, hoja.Dimension.End.Column, vertical);
         }
 
-        List<T> _leerHoja<T>(ExcelWorksheet hoja) where T : new()
+
+        /// <summary>
+        /// leer bloque de celdas; si se pasa 0 en inicio/fin columna/fila se toma el inicio/fin
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="nombreHoja"></param>
+        /// <param name="vertical"></param>
+        /// <param name="inicioFila"></param>
+        /// <param name="finFila"></param>
+        /// <param name="inicioColumna"></param>
+        /// <param name="finColumna"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public List<T> LeerBloque<T>(string nombreHoja, bool vertical, int inicioFila, int finFila, int inicioColumna, int finColumna) where T : new()
+        {
+            var hoja = _excel.Workbook.Worksheets[nombreHoja];
+            if (hoja == null)
+            {
+                throw new ArgumentException("El nombre de la hoja no es válido");
+            }
+            inicioFila = inicioFila == 0 ? hoja.Dimension.Start.Row : inicioFila;
+            finFila = finFila == 0 ? hoja.Dimension.End.Row : finFila;
+            inicioColumna = inicioColumna == 0 ? hoja.Dimension.Start.Column : inicioColumna;
+            finColumna = finColumna == 0 ? hoja.Dimension.End.Column : finColumna;
+
+            return _leer<T>(hoja, inicioFila, finFila, inicioColumna, finColumna, vertical);
+        }
+
+        /// <summary>
+        /// leer bloque de celdas; si se pasa 0 en inicio/fin columna/fila se toma el inicio/fin
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="numeroHoja"></param>
+        /// <param name="vertical"></param>
+        /// <param name="inicioFila"></param>
+        /// <param name="finFila"></param>
+        /// <param name="inicioColumna"></param>
+        /// <param name="finColumna"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public List<T> LeerBloque<T>(int numeroHoja, bool vertical, int inicioFila, int finFila, int inicioColumna, int finColumna) where T : new()
+        {
+            var hoja = _excel.Workbook.Worksheets[numeroHoja];
+            if (hoja == null)
+            {
+                throw new ArgumentException("El numero de la hoja no es válido");
+            }
+            inicioFila = inicioFila == 0 ? hoja.Dimension.Start.Row : inicioFila;
+            finFila = finFila == 0 ? hoja.Dimension.End.Row : finFila;
+            inicioColumna = inicioColumna == 0 ? hoja.Dimension.Start.Column : inicioColumna;
+            finColumna = finColumna == 0 ? hoja.Dimension.End.Column : finColumna;
+
+            return _leer<T>(hoja, inicioFila, finFila, inicioColumna, finColumna, vertical);
+        }
+
+        /// <summary>
+        /// leer bloque de celdas; si se pasa 0 en inicio/fin columna/fila se toma el inicio/fin
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="vertical"></param>
+        /// <param name="inicioFila"></param>
+        /// <param name="finFila"></param>
+        /// <param name="inicioColumna"></param>
+        /// <param name="finColumna"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public List<T> LeerBloque<T>(bool vertical, int inicioFila, int finFila, int inicioColumna, int finColumna) where T : new()
+        {
+            var hoja = _excel.Workbook.Worksheets[1];
+            inicioFila = inicioFila == 0 ? hoja.Dimension.Start.Row : inicioFila;
+            finFila = finFila == 0 ? hoja.Dimension.End.Row : finFila;
+            inicioColumna = inicioColumna == 0 ? hoja.Dimension.Start.Column : inicioColumna;
+            finColumna = finColumna == 0 ? hoja.Dimension.End.Column : finColumna;
+
+            return _leer<T>(hoja, inicioFila, finFila, inicioColumna, finColumna, vertical);
+        }
+        
+
+        List<T> _leer<T>(ExcelWorksheet hoja, int inicioFila, int finFila, int inicioColumna, int finColumna, bool vertical) where T : new()
+        {
+            if (vertical)
+            {
+                return _leerVertical<T>(hoja, inicioFila, finFila, inicioColumna, finColumna);
+            }
+            else
+            {
+                return _leerHorizontal<T>(hoja, inicioFila, finFila, inicioColumna, finColumna);
+
+            }
+        }
+
+        List<T> _leerVertical<T>(ExcelWorksheet hoja, int inicioFila, int finFila, int inicioColumna, int finColumna) where T : new()
         {
             ErroresParseo = new List<ErrorParseo>();
             var result = new List<T>();
-            int columna = 1, fila = 1;
+            int columna = inicioColumna, fila;
 
             try
             {
                 var T_properties = typeof(T).GetProperties().Where(p => p.GetSetMethod() != null).ToDictionary(p => p.Name, p => p.GetSetMethod());
                 var hoja_properties = new Dictionary<int, string>();
 
-                for (fila = hoja.Dimension.Start.Column;
-                                    fila <= hoja.Dimension.End.Column;
-                                    fila++)
-                {
-                    hoja_properties.Add(fila, hoja.Cells[columna, fila].Text);
-                }
-                fila++;
 
-                for (columna = hoja.Dimension.Start.Row + 1;
-                     columna <= hoja.Dimension.End.Row;
+                for (fila = inicioFila;
+                    fila <= finFila;
+                    fila++)
+                {
+                    hoja_properties.Add(fila, hoja.Cells[fila, columna].Text);
+                }
+                columna++;
+
+                for (columna = inicioColumna + 1;
+                     columna <= finColumna;
                      columna++)
                 {
                     var t = new T();
                     var errorParseo = false;
-                    for (fila = hoja.Dimension.Start.Column;
-                            fila <= hoja.Dimension.End.Column;
+                    bool esFilaVacia = true;
+                    for (fila = inicioFila;
+                            fila <= finFila;
                             fila++)
                     {
                         // busco el nombre de la propiedad segun el titulo
                         var propiedad = hoja_properties[fila];
 
                         // busco la propiedad del metodo
-                        if (T_properties.ContainsKey(propiedad))
+                        if (T_properties.ContainsKey(propiedad) && hoja.Cells[fila, columna].Value != null)
                         {
+                            esFilaVacia = false;
                             var setMethod = T_properties[propiedad];
                             var parametro = setMethod.GetParameters().FirstOrDefault().ParameterType;
                             try
                             {
                                 // intento parsear valor
-                                var valor = Convert.ChangeType(hoja.Cells[columna, fila].Value, parametro);
+                                var valor = Convert.ChangeType(hoja.Cells[fila, columna].Value, parametro);
                                 setMethod.Invoke(t, new object[] { valor });
                             }
                             catch (FormatException)
                             {
                                 errorParseo = true;
                                 // no se pudo parsear
-                                ErroresParseo.Add( new ErrorParseo {
-                                    Descripcion = "No se pudo parsear '" + hoja.Cells[columna, fila].Value.ToString() + "' como " + parametro.FullName,
+                                ErroresParseo.Add(new ErrorParseo
+                                {
                                     Fila = fila,
-                                    Columna = columna
+                                    Columna = columna,
+                                    ValorLeido = hoja.Cells[fila, columna].Value,
+                                    TipoEsperado = parametro.FullName
                                 });
                             }
 
                         }
                     }
-                    if (_agregarTodos || !errorParseo)
+                    if ((_agregarTodos || !errorParseo) && !esFilaVacia)
                     {
                         result.Add(t);
                     }
-                    
+
                 }
 
                 return result;
@@ -124,9 +241,84 @@ namespace ExcelReader
             }
             catch (Exception)
             {
-                return null ;
+                return null;
             }
-
         }
+
+        List<T> _leerHorizontal<T>(ExcelWorksheet hoja, int inicioFila, int finFila, int inicioColumna, int finColumna) where T : new()
+        {
+            ErroresParseo = new List<ErrorParseo>();
+            var result = new List<T>();
+            int columna, fila = inicioFila;
+
+            try
+            {
+                var T_properties = typeof(T).GetProperties().Where(p => p.GetSetMethod() != null).ToDictionary(p => p.Name, p => p.GetSetMethod());
+                var hoja_properties = new Dictionary<int, string>();
+
+                for (columna = inicioColumna;
+                    columna <= finColumna;
+                    columna++)
+                {
+                    hoja_properties.Add(columna, hoja.Cells[fila, columna].Text);
+                }
+                fila++;
+
+                for (fila = inicioFila + 1;
+                     fila <= finFila;
+                     fila++)
+                {
+                    var t = new T();
+                    bool errorParseo = false;
+                    bool esFilaVacia = true;
+                    for (columna = inicioColumna;
+                            columna <= finColumna;
+                            columna++)
+                    {
+                        // busco el nombre de la propiedad segun el titulo
+                        var propiedad = hoja_properties[columna];
+
+                        // busco la propiedad del metodo
+                        if (T_properties.ContainsKey(propiedad) && hoja.Cells[fila, columna].Value != null)
+                        {
+                            esFilaVacia = false;
+                            var setMethod = T_properties[propiedad];
+                            var parametro = setMethod.GetParameters().FirstOrDefault().ParameterType;
+                            try
+                            {
+                                // intento parsear valor
+                                var valor = Convert.ChangeType(hoja.Cells[fila, columna].Value, parametro);
+                                setMethod.Invoke(t, new object[] { valor });
+                            }
+                            catch (FormatException)
+                            {
+                                errorParseo = true;
+                                // no se pudo parsear
+                                ErroresParseo.Add(new ErrorParseo
+                                {
+                                    Fila = fila,
+                                    Columna = columna,
+                                    ValorLeido = hoja.Cells[fila, columna].Value,
+                                    TipoEsperado = parametro.FullName
+                                });
+                            }
+                        }
+                    }
+                    if ((_agregarTodos || !errorParseo) && !esFilaVacia)
+                    {
+                        result.Add(t);
+                    }
+
+                }
+
+                return result;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
     }
 }
