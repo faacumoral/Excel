@@ -226,6 +226,18 @@ namespace ExcelReader
                                     TipoEsperado = parametro.FullName
                                 });
                             }
+                            catch (InvalidCastException)
+                            {
+                                errorParseo = true;
+                                // no se pudo parsear
+                                ErroresParseo.Add(new ErrorParseo
+                                {
+                                    Fila = fila,
+                                    Columna = columna,
+                                    ValorLeido = hoja.Cells[fila, columna].Value,
+                                    TipoEsperado = parametro.FullName
+                                });
+                            }
 
                         }
                     }
@@ -291,6 +303,18 @@ namespace ExcelReader
                                 setMethod.Invoke(t, new object[] { valor });
                             }
                             catch (FormatException)
+                            {
+                                errorParseo = true;
+                                // no se pudo parsear
+                                ErroresParseo.Add(new ErrorParseo
+                                {
+                                    Fila = fila,
+                                    Columna = columna,
+                                    ValorLeido = hoja.Cells[fila, columna].Value,
+                                    TipoEsperado = parametro.FullName
+                                });
+                            }
+                            catch (InvalidCastException)
                             {
                                 errorParseo = true;
                                 // no se pudo parsear
