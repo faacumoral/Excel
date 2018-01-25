@@ -153,7 +153,12 @@ namespace ExcelReader
 
             return _leer<T>(hoja, inicioFila, finFila, inicioColumna, finColumna, vertical);
         }
-        
+
+
+        IDictionary<String, MethodInfo> _getTProperties<T>()
+        {
+            return typeof(T).GetProperties().Where(p => p.GetSetMethod() != null).ToDictionary(p => p.Name.Replace("__", " "), p => p.GetSetMethod());
+        }
 
         List<T> _leer<T>(ExcelWorksheet hoja, int inicioFila, int finFila, int inicioColumna, int finColumna, bool vertical) where T : new()
         {
@@ -176,7 +181,7 @@ namespace ExcelReader
 
             try
             {
-                var T_properties = typeof(T).GetProperties().Where(p => p.GetSetMethod() != null).ToDictionary(p => p.Name, p => p.GetSetMethod());
+                var T_properties = _getTProperties<T>();
                 var hoja_properties = new Dictionary<int, string>();
 
 
@@ -265,7 +270,7 @@ namespace ExcelReader
 
             try
             {
-                var T_properties = typeof(T).GetProperties().Where(p => p.GetSetMethod() != null).ToDictionary(p => p.Name, p => p.GetSetMethod());
+                var T_properties = _getTProperties<T>();
                 var hoja_properties = new Dictionary<int, string>();
 
                 for (columna = inicioColumna;
