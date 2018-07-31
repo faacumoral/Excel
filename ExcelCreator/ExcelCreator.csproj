@@ -48,6 +48,7 @@
     <Compile Include="ExcelCreator.cs" />
     <Compile Include="ExcelCelda.cs" />
     <Compile Include="ExcelConfig.cs" />
+    <Compile Include="ExcelHelpers.cs" />
     <Compile Include="ExcelHoja.cs" />
     <Compile Include="ExcelMensajes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
