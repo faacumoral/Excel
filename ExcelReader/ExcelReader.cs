@@ -189,7 +189,7 @@ namespace ExcelReader
                     fila <= finFila;
                     fila++)
                 {
-                    hoja_properties.Add(fila, hoja.Cells[fila, columna].Text);
+                    hoja_properties.Add(fila, hoja.Cells[fila, columna].Text.Trim());
                 }
                 columna++;
 
@@ -215,8 +215,9 @@ namespace ExcelReader
                             var parametro = setMethod.GetParameters().FirstOrDefault().ParameterType;
                             try
                             {
+                                object cell = hoja.Cells[fila, columna].Value.ToString().Trim();
                                 // intento parsear valor
-                                var valor = Convert.ChangeType(hoja.Cells[fila, columna].Value, parametro);
+                                var valor = Convert.ChangeType(cell, parametro);
                                 setMethod.Invoke(t, new object[] { valor });
                             }
                             catch (FormatException)
@@ -277,7 +278,7 @@ namespace ExcelReader
                     columna <= finColumna;
                     columna++)
                 {
-                    hoja_properties.Add(columna, hoja.Cells[fila, columna].Text);
+                    hoja_properties.Add(columna, hoja.Cells[fila, columna].Text.Trim());
                 }
                 fila++;
 
@@ -304,7 +305,8 @@ namespace ExcelReader
                             try
                             {
                                 // intento parsear valor
-                                var valor = Convert.ChangeType(hoja.Cells[fila, columna].Value, parametro);
+                                object cell = hoja.Cells[fila, columna].Value.ToString().Trim();
+                                var valor = Convert.ChangeType(cell, parametro);
                                 setMethod.Invoke(t, new object[] { valor });
                             }
                             catch (FormatException)
