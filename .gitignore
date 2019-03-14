@@ -1,5 +1,7 @@
 .vs/*
-ExcelCreator/bin
-ExcelCreator/obj
-ExcelReader/bin
-ExcelReader/obj
+ExcelCreator/bin/*
+ExcelCreator/obj/*
+ExcelReader/bin/*
+ExcelReader/obj/*
+TestExcels/bin/*
+TestExcels/obj/*

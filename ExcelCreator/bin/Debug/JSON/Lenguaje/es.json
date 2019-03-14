@@ -1,9 +1,0 @@
-﻿{
-  "NoContenido": "No se ha especificado contenido",
-  "NoContenidoNoDatasource": "No se ha especificado contenido o datasource",
-  "NoParser": "No se ha podido parsear el datasource",
-  "NoConfig": "No se ha indicado archivo de configuración",
-  "FalloAgregarHoja": "No se ha podido agregar la hoja",
-  "FalloGenerarExcel": "No se ha podido generar el archivo Excel, ¿se ha inidicado contenido?",
-  "NoNombreArchivo": "No se ha indicado nombre el archivo"
-}
